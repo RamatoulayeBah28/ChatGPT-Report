@@ -4,7 +4,7 @@ import FileUploader from './components/FileUploader';
 import Report from './components/Report';
 
 export default function Home() {
-  const [data, setData] = useState(null);
+    const [data, setData] = useState(null);
 
   const handleFileUpload = (fileData) => {
     setData(fileData);
@@ -12,7 +12,7 @@ export default function Home() {
 
   return (
     <div className="app-container">
-      <h1 className="title">SmartPrint: See Your ChatGPT Footprint Grow Green</h1>
+      <h1 className="title">SmartPrint: See Your ChatGPT Footprint</h1>
       {!data ? (
         <FileUploader onFileUpload={handleFileUpload} />
       ) : (

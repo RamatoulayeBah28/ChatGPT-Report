@@ -1,4 +1,6 @@
 import React from 'react';
+import Report from './Report';
+import analyze from '../analyze.js';
 
 export default function FileUploader({ onFileUpload }) {
   const handleFileChange = (e) => {
@@ -7,7 +9,9 @@ export default function FileUploader({ onFileUpload }) {
       const reader = new FileReader();
       reader.onload = (event) => {
         const fileData = JSON.parse(event.target.result);
-        onFileUpload(fileData);
+        const userData = analyze(fileData);
+        onFileUpload(userData);
+        <Report data={userData}/>
       };
       reader.readAsText(file);
     }

@@ -1,6 +1,6 @@
-import * as data from './conversations.json'
+export default function analyze(data) {
 
-function cleanData(data) {
+    function cleanData(data) {
     let cleanData = [];
     for (let convo in data) {
         if (data[convo].mapping) {
@@ -63,12 +63,10 @@ function getByMonthData(currentData) {
     return monthData;
 }
 
-function getMonthAverage(monthlyData) {
-    let sum = 0;
-    for (let i = 0; i < monthlyData.length; i++) {
-        sum += monthlyData[i];
-    }
-    return sum / monthlyData.length;
+function getMonthAverage(totalQueries) {
+    let avg = Math.round(parseInt(totalQueries) / 12 * 100) / 100;
+
+    return avg
 }
 
 function convertCleanDataToString(cleanData) {
@@ -82,24 +80,35 @@ function convertCleanDataToString(cleanData) {
     return str;
 }
 
+function getLongestChat(data) {
+    let longest = data[0];
+    for(let i in data) {
+        if(data[i].queries.length>longest.queries.length) {
+            longest = data[i];
+        }
+    }
+    return longest.title;
+}
+
 function findTopWords(text) {
-    // Step 1: Remove special characters (except spaces) and convert text to lowercase
+    // Removes special characters (except spaces) and convert text to lowercase
     const cleanedText = text.toLowerCase().replace(/[^a-z\s]/g, " ");
 
-    // Step 2: Split the text into an array of words
+    // Split the text into an array of words
     const wordsArray = cleanedText.split(/\s+/);
 
     const stopwords = ["a", "an", "the", "and", "but", "or", "in", "on", "at", "of", "to", "for", "with", "by", "about", "above", "across", "after", "against", "along", "among", "around", "as", "at", "before", "behind", "below", "beneath", "beside", "between", "beyond", "but", "by", "despite", "down", "during", "except", "for", "from", "in", "inside", "into", "like", "near", "of", "off", "on", "onto", "out", "outside", "over", "past", "since", "through", "throughout", "till", "to", "toward", "under", "underneath", "until", "up", "upon", "with", "within", "without"];
 
-    // Step 3: Create a frequency map for each word
+    // Creates a frequency map for each word
     const wordFrequency = {};
     wordsArray.forEach(word => {
-        if (word && !(word in stopwords)) {  // Ensure empty strings are ignored
+        if (word && !(stopwords.includes(word)) && word.length > 5) {  // Ensure empty strings are ignored
             wordFrequency[word] = (wordFrequency[word] || 0) + 1;
         }
     });
 
-    // Step 4: Sort the words by frequency and select the top 5
+    
+    // Sorts the words by frequency and select the top 5
     const topWords = Object.entries(wordFrequency)
         .sort((a, b) => b[1] - a[1]) // Sort by frequency in descending order
         .slice(0, 5) // Get the top 5 words
@@ -108,11 +117,18 @@ function findTopWords(text) {
     return topWords;
 }
 
+
 let cleanedData = cleanData(data);
 let thisYearData = getThisYearData(cleanedData);
 
 
-let totalQueries = getTotalQueries(cleanedData);
+let totalQueries = getTotalQueries(thisYearData);
 let monthlyData = getByMonthData(thisYearData);
-let monthAverage = getMonthAverage(cleanedData);
-let topWords = findTopWords(convertCleanDataToString(cleanedData));
+let monthAverage = getMonthAverage(totalQueries);
+let topWords = findTopWords(convertCleanDataToString(thisYearData));
+let longestTitle = getLongestChat(thisYearData);
+
+let finalData = [totalQueries, monthlyData, monthAverage, topWords, longestTitle];
+
+return finalData;
+}
