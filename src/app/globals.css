@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* :root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+} */
+
+/* Global Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Nunito', sans-serif; /* Friendly, rounded font */
+  background-color: #f5f7f5; /* Light greenish beige for a soft natural feel */
+  color: #2d3d29; /* Dark green for text */
+}
+
+h1 {
+  color: #49796b; /* Earthy green for the title */
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* App container styles */
+.app-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.app-container:hover {
+  transform: scale(1.02); /* Slight scale effect on hover */
+}
+
+/* Button Styling for File Upload */
+button {
+  background-color: #4caf50; /* Earthy green for buttons */
+  color: #ffffff;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #fefefe; /* Darker green on hover */
+}
+
+/* FileUploader Component Styles */
+.file-upload {
+  padding: 20px;
+  background-color: #f0f4f1;
+  border-radius: 12px;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+}
+
+.file-upload h2 {
+  text-align: center;
+  color: #49796b;
+}
+
+/* Report Component Styles */
+.report-container {
+  background-color: #eef7ef; /* Light greenish tint for report section */
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+}
+
+.report-container h2 {
+  color: #4a8a4a; /* Darker green for subheadings */
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .app-container {
+    padding: 1rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+}
