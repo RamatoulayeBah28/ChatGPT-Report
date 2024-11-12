@@ -1,13 +1,10 @@
 import React from 'react';
-import { useRef } from 'react';
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
 import { jsPDF } from 'jspdf';  // Import jsPDF for PDF download
 import { FacebookShareButton, TwitterShareButton, LinkedinShareButton, FacebookIcon, TwitterIcon, LinkedinIcon } from 'react-share'; // Import react-share for social sharing
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
-
-
 
 // Helper function to calculate carbon impact
 function calculateCarbonImpact(data) {
@@ -27,8 +24,8 @@ function generateChartData(data) {
         label: 'Monthly Usage',
         data: monthlyUsage,
         fill: true,
-        backgroundColor: 'rgba(255, 99, 132, 0.2)',  // Fun pink color for background
-        borderColor: 'rgba(255, 99, 132, 1)',  // Fun pink for the line
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',  
+        borderColor: 'rgba(255, 99, 132, 1)',
         tension: 0.4,
       },
     ],
@@ -41,18 +38,16 @@ export default function Report({ data }) {
   const monthlyAvg = (data[2]);
   const today = new Date()
   const monthlyData = (data[1])
-  const topWords = data[3]; // Sample most used words
+  const topWords = data[3]; 
   const longestTitle = data[4];
-  const carbonCost = (carbonImpact * 0.02).toFixed(2); // Hypothetical cost of carbon impact
+  const carbonCost = (carbonImpact * 0.02).toFixed(2); 
   const WaterUsed = ((totalInteractions * 14.29) / 1000).toFixed(2); // water used in l
   const waterPerPerson = Math.floor((WaterUsed / 2));
   const electricityUse = (totalInteractions * 0.05).toFixed(2); // in kWh
   const microwaveUse = (electricityUse / 0.13 * 10).toFixed(2); // in min
   const lighsUse = Math.floor((electricityUse / 0.06)) // in hrs
 
-
-
-  // Function to download the report as a PDF
+  // Function to download the report as a PDF TO WORK ON
   const downloadPDF = () => {
     const doc = new jsPDF();
     doc.setFontSize(16);
@@ -75,10 +70,10 @@ export default function Report({ data }) {
 
   function countStatement(count) {
     if (count >= 30) {
-          return "That's like chatting with GPT almost every day!";
+        return "That's like chatting with GPT almost every day! 🤯";
     }
     else {
-      return "Good job, you kept your usage to a minimum!"
+      return "Good job, you kept your usage to a minimum! 🥳"
     }
   }
 
@@ -88,11 +83,11 @@ export default function Report({ data }) {
 
       <p className="text-lg mb-4 text-gray-700">
 
-        This month, you used ChatGPT <strong>{monthlyData[today.getMonth()]}</strong> times. {countStatement(monthlyData[today.getMonth()])} 🎉
+        This month, you used ChatGPT <strong>{monthlyData[today.getMonth()]}</strong> times. {countStatement(monthlyData[today.getMonth()])}
       </p>
 
       <p className="text-lg mb-4 text-gray-700">
-        This year, you interacted with ChatGPT <strong>{totalInteractions}</strong> times. You're really into it! 🥳
+        This year, you interacted with ChatGPT <strong>{totalInteractions}</strong> times. You're really into it! 🤓
       </p>
 
       <p className="text-lg mb-4 text-gray-700">
@@ -132,7 +127,6 @@ export default function Report({ data }) {
         The cost of your carbon impact is roughly <strong>${carbonCost}</strong>. 🌎💸
       </p>
 
-
       <div className="mb-6">
         <p className="text-lg mb-4 text-gray-700">
           But hey, you're saving energy and making a difference! 🌍💚
@@ -161,8 +155,6 @@ export default function Report({ data }) {
         </button>
       </div>
 
-      
-
       <div className="mt-6">
         <button
           className="bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-600 transition-all"
@@ -188,7 +180,7 @@ export default function Report({ data }) {
         </div>
       </div>
 
-      {/* Download PDF Button */}
+      {/* Download PDF Button TO WORK ON*/}
       <div className="mt-6">
         <button 
           className="bg-purple-500 text-white p-3 rounded-lg hover:bg-purple-600 transition-all"
